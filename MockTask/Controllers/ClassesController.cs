@@ -43,23 +43,18 @@ namespace MockTask.Controllers
             return View(classes);
         }
 
-        // GET: Classes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Classes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Number")] Classes classes)
+
+        public IActionResult Create(Classes classes)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(classes);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(classes);

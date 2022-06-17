@@ -30,7 +30,7 @@ namespace MockTask
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectProduction")));
-
+            services.AddTransient<SQLService>();
             services.AddSingleton<MongoService>();
 
             services.Configure<DatabaseSettings>(Configuration.GetSection("MongoDatabase"));

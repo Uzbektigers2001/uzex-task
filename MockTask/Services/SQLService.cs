@@ -13,7 +13,17 @@ namespace MockTask.Services
             _dbContext = dbContext;
         }
 
+        public ViewModel Worker()
+        {
+            ViewModel model = new ViewModel();
 
+            model.sudentsCount = GetAll(new Students()).Count;
+            model.subjectsCount = GetAll(new Subjects()).Count;
+            model.classesCount = GetAll(new Classes()).Count;
+            model.teachersCount = GetAll(new Teachers()).Count;
+
+            return model;
+        }
 
         public List<Classes> GetAll(Classes classes) => _dbContext.Classes.Where(x => x.SendCheck != 1).ToList();
         public List<Students> GetAll(Students students) => _dbContext.Students.Where(x => x.SendCheck != 1).ToList();

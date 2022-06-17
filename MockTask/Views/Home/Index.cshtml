@@ -1,5 +1,39 @@
-﻿@*@model MockTask.Models.ViewModel
+﻿@model MockTask.Models.ViewModel
 
+
+@if (@Model != null)
+{
+    <form asp-action="Index" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Students</td>
+                    <td>@Model.sudentsCount</td>
+                    <td><a href="~/Students/Create">insert</a></td>
+                </tr>
+                
+                <tr>
+                    <td>Classes</td>
+                    <td>@Model.classesCount</td>
+                    <td><a href="~/Classes/Create">insert</a></td>
+                </tr>
+                <tr>
+                    <td>Subjects</td>
+                    <td>@Model.subjectsCount</td>
+                    <td><a href="~/Subjects/Create">insert</a></td>
+                </tr>
+                <tr>
+                    <td>Teachers</td>
+                    <td>@Model.teachersCount</td>
+                    <td><a href="~/Teachers/Create">insert</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Export</button>
+    </form>
+}
+
+@*
 <form>
 <table>
     <tbody>
@@ -32,35 +66,3 @@
 <button type="submit">Submit</button>
 </form>
 *@
-
-@if (@Model != null)
-{
-    <form>
-        <table>
-            <tbody>
-                <tr>
-
-                    <td>Students</td>
-                    <td>@Model.sudentsCount</td>
-                </tr>
-                <tr>
-                    <td>Classes</td>
-                    <td>@Model.classesCount</td>
-                </tr>
-                <tr>
-                    <td>Subjects</td>
-                    <td>@Model.subjectsCount</td>
-                </tr>
-                <tr>
-                    <td>Teachers</td>
-                    <td>@Model.teachersCount</td>
-                </tr>
-                <tr>
-                    <td>Export</td>
-                    <td>@Model.Export = true</td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit">Submit</button>
-    </form>
-}
