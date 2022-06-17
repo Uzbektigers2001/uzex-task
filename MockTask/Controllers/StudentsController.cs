@@ -7,21 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MockTask.DBContext;
 using MockTask.Models;
+using MockTask.Services;
 
 namespace MockTask.Controllers
 {
     public class StudentsController : Controller
     {
         private readonly ApplicationDBContext _context;
-
-        public StudentsController(ApplicationDBContext context)
+        private readonly MongoService _mongoservice;
+        public StudentsController(ApplicationDBContext context, MongoService mongoService)
         {
             _context = context;
+            _mongoservice = mongoService;
         }
 
         // GET: Students
         public async Task<IActionResult> Index()
         {
+
+            var res = _context.Students.Where(x => x.Id != 1).ToList();
+
+            _mongoservice.Insert(res);
+
             return View(await _context.Students.ToListAsync());
         }
 

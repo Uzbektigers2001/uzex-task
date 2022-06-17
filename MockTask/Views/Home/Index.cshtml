@@ -1,0 +1,66 @@
+﻿@*@model MockTask.Models.ViewModel
+
+<form>
+<table>
+    <tbody>
+        <tr>
+            <td>Students</td>
+            @if (@Model.sudentsCount)
+                {
+                    <td>@Model.sudentsCount</td>
+                    
+                }
+        </tr>
+        <tr>
+            <td>Classes</td>
+            <td>@Model.classesCount</td>
+        </tr>
+        <tr>
+            <td>Subjects</td>
+            <td>@Model.subjectsCount</td>
+        </tr>
+        <tr>
+            <td>Teachers</td>
+            <td>@Model.teachersCount</td>
+        </tr>
+        <tr>
+            <td>Export</td>
+            <td>@Model.Export = true</td>
+        </tr>
+    </tbody> 
+</table>
+<button type="submit">Submit</button>
+</form>
+*@
+
+@if (@Model != null)
+{
+    <form>
+        <table>
+            <tbody>
+                <tr>
+
+                    <td>Students</td>
+                    <td>@Model.sudentsCount</td>
+                </tr>
+                <tr>
+                    <td>Classes</td>
+                    <td>@Model.classesCount</td>
+                </tr>
+                <tr>
+                    <td>Subjects</td>
+                    <td>@Model.subjectsCount</td>
+                </tr>
+                <tr>
+                    <td>Teachers</td>
+                    <td>@Model.teachersCount</td>
+                </tr>
+                <tr>
+                    <td>Export</td>
+                    <td>@Model.Export = true</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+}

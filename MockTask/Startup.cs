@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MockTask.DBContext;
+using MockTask.Models;
+using MockTask.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,11 @@ namespace MockTask
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ConnectProduction")));
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectProduction")));
+
+            services.AddSingleton<MongoService>();
+
+            services.Configure<DatabaseSettings>(Configuration.GetSection("MongoDatabase"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
