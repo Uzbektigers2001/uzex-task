@@ -30,6 +30,8 @@ namespace MockTask.Controllers
         [HttpPost]
         public IActionResult Index(ViewModel model)
         {
+            DatabaseSettings databaseSettings = new DatabaseSettings();
+
             if (model.Export is true) _sqlService.UpdateAll();
             return View(model);
         }

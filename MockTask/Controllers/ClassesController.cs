@@ -7,21 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MockTask.DBContext;
 using MockTask.Models;
+using MockTask.Services;
 
 namespace MockTask.Controllers
 {
     public class ClassesController : Controller
     {
         private readonly ApplicationDBContext _context;
+        private readonly SQLService _sqlService;
 
-        public ClassesController(ApplicationDBContext context)
+        public ClassesController(ApplicationDBContext context, SQLService sqlService)
         {
+            _sqlService = sqlService;
             _context = context;
+            
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Classes.ToListAsync());
+            return View(_sqlService.GetAll(new Classes()));
         }
 
 

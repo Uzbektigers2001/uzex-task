@@ -1,9 +1,8 @@
 ﻿@model MockTask.Models.ViewModel
 
-
 @if (@Model != null)
 {
-    <form asp-action="Index" method="post">
+    <form asp-action="Index" method="post" id="forma">
         <table>
             <tbody>
                 <tr>
@@ -30,5 +29,18 @@
             </tbody>
         </table>
         <button type="submit">Export</button>
+
+        <script>
+        document.getElementById("forma").addEventListener('submit', function(){
+        let options = 
+        `
+        Students: ${@Model.sudentsCount}
+        Classes: ${@Model.classesCount}
+        Subjects: ${@Model.subjectsCount}
+        Teachers: ${@Model.teachersCount}
+        `
+        alert(options)
+        })
+</script>
     </form>
 }
