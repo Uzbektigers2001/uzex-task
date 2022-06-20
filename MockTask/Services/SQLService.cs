@@ -21,8 +21,22 @@ namespace MockTask.Services
             model.subjectsCount = GetAll(new Subjects()).Count;
             model.classesCount = GetAll(new Classes()).Count;
             model.teachersCount = GetAll(new Teachers()).Count;
-
             return model;
+        }
+
+
+        public void UpdateAll()
+        {
+            var students = GetAll(new Students());
+            var classes = GetAll(new Classes());
+            var subjects = GetAll(new Subjects());
+            var teachers = GetAll(new Teachers());
+
+            Update(students);
+            Update(classes);
+            Update(subjects);
+            Update(teachers);
+
         }
 
         public List<Classes> GetAll(Classes classes) => _dbContext.Classes.Where(x => x.SendCheck != 1).ToList();
@@ -55,4 +69,5 @@ namespace MockTask.Services
             _dbContext.SaveChanges();
         }
     }
+    
 }

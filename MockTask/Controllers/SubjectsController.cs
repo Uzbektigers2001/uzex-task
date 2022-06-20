@@ -19,23 +19,18 @@ namespace MockTask.Controllers
             _context = context;
         }
 
-        // GET: Subjects
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Subjects.ToListAsync());
         }
 
-
-        // GET: Subjects/Create
         public IActionResult Create()
         {
-            Subjects subjects = new Subjects();
-            return View(subjects);
+            return View();
         }
 
-        // POST: Subjects/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         public IActionResult Create(Subjects subjects)
         {

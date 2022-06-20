@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using MockTask.DBContext;
 using MockTask.Models;
 using MockTask.Services;
@@ -15,21 +10,18 @@ namespace MockTask.Controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly MongoService _mongoservice;
-        public StudentsController(ApplicationDBContext context, MongoService mongoService)
+        private readonly SQLService _sqlService;
+        public StudentsController(ApplicationDBContext context, MongoService mongoService,SQLService sqlService)
         {
             _context = context;
+            _sqlService = sqlService;
             _mongoservice = mongoService;
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-
-            var res = _context.Students.Where(x => x.Id != 1).ToList();
-
-            _mongoservice.Insert(res);
-
-            return View(await _context.Students.ToListAsync());
+            return View(_sqlService.GetAll(new Students()));
         }
 
 
@@ -45,23 +37,7 @@ namespace MockTask.Controllers
             {
                 _context.Add(students);
                 _context.SaveChanges();
-                return View(students); //RedirectToAction(nameof(Index));
-            }
-            return View(students);
-        }
-
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var students = await _context.Students.FindAsync(id);
-            if (students == null)
-            {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
             return View(students);
         }
